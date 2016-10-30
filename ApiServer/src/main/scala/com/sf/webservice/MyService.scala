@@ -5,6 +5,10 @@ import com.sf.connector.google.GooglePlacesApiConnector
 import spray.routing._
 import spray.http._
 import MediaTypes._
+import spray.json.{JsString, _}
+import DefaultJsonProtocol._
+import com.sf.model.MyJsonProtocol._
+
 
 
 
@@ -53,7 +57,10 @@ trait MyService extends HttpService {
                   val prettyip = ip.toOption.map(_.getHostAddress).getOrElse("78.97.211.14")
                   val placesConnector = new GooglePlacesApiConnector(sourceIp = "78.97.211.145")
                   val results = placesConnector.getNearbyLocationData(search_term)
-                  complete("OK")
+
+                  //complete(results.head.toJson.prettyPrint)
+                  complete(s"${results.map(x=>x.toJson) mkString ",\n"}")
+
               }
             }
         }
@@ -61,4 +68,6 @@ trait MyService extends HttpService {
       }
     }
 }
+
+
 
