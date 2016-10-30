@@ -20,9 +20,9 @@ class GooglePlacesApiConnector(val sourceIp:String="") extends ApiConnector{
     PlacesApi.textSearchQuery(context,searchKey).await().results.toList
   }
 
-  override def getNearbyLocationData(searchKey: String, latLong: LatLong = geoLocation.latLong): List[PlacesSearchResult] = {
+  override def getNearbyLocationData(searchKey: String, latLong: LatLong = geoLocation.latLong): List[Location] = {
     val currentLatLng = buildLatLong(latLong.lat, latLong.long)
-    PlacesApi.textSearchQuery(context, searchKey).location(currentLatLng).radius(5000).await().results.toList
+    PlacesApi.textSearchQuery(context, searchKey).location(currentLatLng).radius(5000).await().results.map(x=> new Location(x.name,x.formattedAddress, x.placeId, x.rating)).toList
   }
 
   override def getLocationDetails(locationId: String): Location = {
@@ -40,10 +40,10 @@ class GooglePlacesApiConnector(val sourceIp:String="") extends ApiConnector{
 object Runner{
   def main(args: Array[String]) {
     val placesConnector = new GooglePlacesApiConnector(sourceIp = "78.97.211.145")
-    val results = placesConnector.getNearbyLocationData("KFC")
+    val results = placesConnector.getNearbyLocationData("pizza")
     results foreach {
       res =>
-        println(res.name + " - " + res.formattedAddress)
+        println(res)
     }
   }
 }

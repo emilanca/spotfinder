@@ -1,9 +1,12 @@
 package com.sf.webservice
 
 import akka.actor.Actor
+import com.sf.connector.google.GooglePlacesApiConnector
 import spray.routing._
 import spray.http._
 import MediaTypes._
+
+
 
 // we don't implement our route structure directly in the service actor because
 // we want to be able to test it independently, without having to spin up an actor
@@ -16,7 +19,8 @@ class MyServiceActor extends Actor with MyService {
   // this actor only runs our route, but you could add
   // other things here, like request stream processing
   // or timeout handling
-  def receive = runRoute(myRoute)
+  def receive = runRoute(myRoute~placesRoute)
+
 }
 
 
@@ -30,11 +34,31 @@ trait MyService extends HttpService {
           complete {
             <html>
               <body>
-                <h1>Say hello to <i>spray-routing</i> on <i>spray-can</i>!</h1>
+                <h1>Spotfinder poc</h1>
               </body>
             </html>
           }
         }
       }
     }
+
+  val placesRoute =
+    path("places") {
+      get {
+        parameters('search_term) {
+          search_term =>
+            respondWithMediaType(`application/json`) { // XML is marshalled to `text/xml` by default, so we simply override here
+              clientIP {
+                ip =>
+                  val prettyip = ip.toOption.map(_.getHostAddress).getOrElse("78.97.211.14")
+                  val placesConnector = new GooglePlacesApiConnector(sourceIp = "78.97.211.145")
+                  val results = placesConnector.getNearbyLocationData(search_term)
+                  complete("OK")
+              }
+            }
+        }
+
+      }
+    }
 }
+
