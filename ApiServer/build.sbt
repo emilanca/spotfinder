@@ -20,5 +20,8 @@ libraryDependencies ++= {
 }
 // https://mvnrepository.com/artifact/com.google.maps/google-maps-services
 libraryDependencies += "com.google.maps" % "google-maps-services" % "0.1.16"
+libraryDependencies += "org.scalatest" % "scalatest_2.11" % "3.0.0" % "test"
+libraryDependencies += "com.maxmind.geoip" % "geoip-api" % "1.3.1"
+//libraryDependencies += "com.typesafe" % "config" % "1.3.1"
 
 Revolver.settings

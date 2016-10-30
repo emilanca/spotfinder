@@ -1,0 +1,14 @@
+ApiServer/.idea/
+ApiServer/project/boot/
+ApiServer/project/plugins/project
+ApiServer/target/
+ApiServer/lib_managed/
+ApiServer/src_managed/
+ApiServer/test-output/
+ApiServer/project/target/
+ApiServer/*.iml
+ApiServer/*.git
+ApiServer/.classpath_nb
+*.iml
+*.class
+
