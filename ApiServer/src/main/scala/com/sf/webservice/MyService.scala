@@ -59,7 +59,8 @@ trait MyService extends HttpService {
                   val results = placesConnector.getNearbyLocationData(search_term)
 
                   //complete(results.head.toJson.prettyPrint)
-                  complete(s"${results.map(x=>x.toJson) mkString ",\n"}")
+                  val data = "{\"data\": [" + s"${results.map(x=>x.toJson) mkString ",\n"}" + "]\n}"
+                  complete(data)
 
               }
             }
