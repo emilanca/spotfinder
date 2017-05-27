@@ -1,24 +1,44 @@
-<form>
-  <!--<div class="form-group">-->
-  <!--<label for="usr"><h1>Search for best spots near you!</h1></label>-->
-  <!--<input type="text" class="form-control" id="usr" value="beer">-->
-  <!--</div>-->
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Search for best spots for any type of activity near you such as 'coffee'" ng-model="search_term">
-    <div class="input-group-btn">
-      <button class="btn btn-default" type="submit" ng-click="getData(search_term)"  >
-        <i class="glyphicon glyphicon-search"></i>
-      </button>
+<div class="container">
+  <form>
+    <!--<div class="form-group">-->
+    <!--<label for="usr"><h1>Search for best spots near you!</h1></label>-->
+    <!--<input type="text" class="form-control" id="usr" value="beer">-->
+    <!--</div>-->
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for best spots for any type of activity near you such as 'coffee'" ng-model="search_term">
+      <div class="input-group-btn">
+        <button class="btn btn-default" type="submit" ng-click="getData(search_term)"  >
+          <i class="glyphicon glyphicon-search"></i>
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div class="container">
-    <div ng-repeat="searchResult in searchResults">
-      <h4>{{searchResult}}</h4>
+    <!--<div class="container">-->
+    <!--<div ng-repeat="searchResult in searchResults">-->
+    <!--<h4>{{searchResult}}</h4>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;{{searchResults}}&ndash;&gt;-->
+    <!--</div>-->
+
+    <div>
+      <div ng-repeat="searchResult in searchResults">
+        <div class="well">
+          <table>
+            <tr>
+              <td><h4><b>{{searchResult.name}} </b>{{searchResult.rating | limitTo : 3 : 0}}</h4></td>
+              <td><h4></h4></td>
+            </tr>
+          </table>
+
+          <h6>{{searchResult.formatted_address}}</h6>
+          <!--{{searchResult}}-->
+        </div>
+      </div>
+      <!--{{searchResults}}-->
     </div>
-  <!--{{searchResults}}-->
-  </div>
 
-</form>
+
+  </form>
+</div>
 
 
