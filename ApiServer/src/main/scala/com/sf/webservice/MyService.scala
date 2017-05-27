@@ -51,7 +51,7 @@ trait MyService extends HttpService {
       get {
         parameters('search_term) {
           search_term =>
-            respondWithMediaType(`application/json`) { // XML is marshalled to `text/xml` by default, so we simply override here
+            respondWithMediaType(`application/json`) {
               clientIP {
                 ip =>
                   val prettyip = ip.toOption.map(_.getHostAddress).getOrElse("78.97.211.14")
@@ -73,7 +73,7 @@ trait MyService extends HttpService {
   val testRoute: Route = {
     path("test") {
       get {
-        respondWithMediaType(`text/html`) { // XML is marshalled to `text/xml` by default, so we simply override here
+        respondWithMediaType(`text/html`) {
           complete {
             <html>
               <body>
