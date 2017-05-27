@@ -23,7 +23,7 @@ class MyServiceActor extends Actor with MyService {
   // this actor only runs our route, but you could add
   // other things here, like request stream processing
   // or timeout handling
-  def receive = runRoute(myRoute~placesRoute)
+  def receive = runRoute(myRoute~placesRoute~testRoute)
 
 }
 
@@ -31,14 +31,14 @@ class MyServiceActor extends Actor with MyService {
 // this trait defines our service behavior independently from the service actor
 trait MyService extends HttpService {
 
-  val myRoute =
+  val myRoute: Route =
     path("") {
       get {
         respondWithMediaType(`text/html`) { // XML is marshalled to `text/xml` by default, so we simply override here
           complete {
             <html>
               <body>
-                <h1>Spotfinder poc</h1>
+                <h1>Spotfinder poc. E.g. usage /places?search_term=mcdonalds</h1>
               </body>
             </html>
           }
@@ -46,7 +46,7 @@ trait MyService extends HttpService {
       }
     }
 
-  val placesRoute =
+  val placesRoute: Route =
     path("places") {
       get {
         parameters('search_term) {
@@ -61,13 +61,30 @@ trait MyService extends HttpService {
                   //complete(results.head.toJson.prettyPrint)
                   val data = "{\"data\": [" + s"${results.map(x=>x.toJson) mkString ",\n"}" + "]\n}"
                   complete(data)
-
               }
             }
+
+
         }
 
       }
     }
+
+  val testRoute: Route = {
+    path("test") {
+      get {
+        respondWithMediaType(`text/html`) { // XML is marshalled to `text/xml` by default, so we simply override here
+          complete {
+            <html>
+              <body>
+                <h1>YO</h1>
+              </body>
+            </html>
+          }
+        }
+      }
+    }
+  }
 }
 
 

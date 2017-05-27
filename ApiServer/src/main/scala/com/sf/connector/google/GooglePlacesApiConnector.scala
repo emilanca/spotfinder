@@ -40,7 +40,7 @@ class GooglePlacesApiConnector(val sourceIp:String="") extends ApiConnector{
 object Runner{
   def main(args: Array[String]) {
     val placesConnector = new GooglePlacesApiConnector(sourceIp = "78.97.211.145")
-    val results = placesConnector.getNearbyLocationData("pizza")
+    val results = placesConnector.getNearbyLocationData("club")
     results foreach {
       res =>
         println(res)
