@@ -4,9 +4,9 @@
   <!--<input type="text" class="form-control" id="usr" value="beer">-->
   <!--</div>-->
   <div class="input-group">
-    <input type="text" class="form-control" placeholder="Search for best spots for any type of activity near you such as 'coffee'">
+    <input type="text" class="form-control" placeholder="Search for best spots for any type of activity near you such as 'coffee'" ng-model="search_term">
     <div class="input-group-btn">
-      <button class="btn btn-default" type="submit" ng-click="getData()" >
+      <button class="btn btn-default" type="submit" ng-click="getData(search_term)"  >
         <i class="glyphicon glyphicon-search"></i>
       </button>
     </div>

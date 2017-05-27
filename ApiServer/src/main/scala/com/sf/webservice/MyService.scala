@@ -8,6 +8,7 @@ import MediaTypes._
 import spray.json.{JsString, _}
 import DefaultJsonProtocol._
 import com.sf.model.MyJsonProtocol._
+import spray.http.HttpHeaders.RawHeader
 
 
 
@@ -51,20 +52,20 @@ trait MyService extends HttpService {
       get {
         parameters('search_term) {
           search_term =>
-            respondWithMediaType(`application/json`) {
-              clientIP {
-                ip =>
-                  val prettyip = ip.toOption.map(_.getHostAddress).getOrElse("78.97.211.14")
-                  val placesConnector = new GooglePlacesApiConnector(sourceIp = "78.97.211.145")
-                  val results = placesConnector.getNearbyLocationData(search_term)
+            respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) {
+              respondWithMediaType(`application/json`) {
+                clientIP {
+                  ip =>
+                    val prettyip = ip.toOption.map(_.getHostAddress).getOrElse("78.97.211.14")
+                    val placesConnector = new GooglePlacesApiConnector(sourceIp = "78.97.211.145")
+                    val results = placesConnector.getNearbyLocationData(search_term)
 
-                  //complete(results.head.toJson.prettyPrint)
-                  val data = "{\"data\": [" + s"${results.map(x=>x.toJson) mkString ",\n"}" + "]\n}"
-                  complete(data)
+                    //complete(results.head.toJson.prettyPrint)
+                    val data = "{\"data\": [" + s"${results.map(x=>x.toJson) mkString ",\n"}" + "]\n}"
+                    complete(data)
+                }
               }
             }
-
-
         }
 
       }
