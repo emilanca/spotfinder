@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="658ee0e8-9e18-458e-9e8e-67f00f782b7e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ApiServer/src/main/scala/com/sf/connector/google/GooglePlacesApiConnector.scala" afterPath="$PROJECT_DIR$/../ApiServer/src/main/scala/com/sf/connector/google/GooglePlacesApiConnector.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/main.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/main.html" afterPath="$PROJECT_DIR$/app/views/main.html" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -730,12 +727,12 @@
       <option name="presentableId" value="Default" />
       <updated>1495905004502</updated>
       <workItem from="1495905006921" duration="6204000" />
-      <workItem from="1495912977684" duration="3262000" />
+      <workItem from="1495912977684" duration="4178000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9466000" />
+    <option name="totallyTimeSpent" value="10382000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
