@@ -14,13 +14,14 @@ angular.module('webappApp')
       'AngularJS',
       'Karma'
     ];
-    $scope.search_term = "McDonalds";
+    // $scope.search_term = "McDonalds";
     $scope.getData = function(search_term) {
-
-      $http.get("http://localhost:8080/places?search_term=" + search_term)
-        .then(function(response) {
-          $scope.searchResults = response.data;
-        });
+      if (search_term!=="" && search_term!==undefined){
+        $http.get("http://localhost:8080/places?search_term=" + search_term)
+          .then(function(response) {
+            $scope.searchResults = response.data.data;
+          });
+      }
     }
 
   });

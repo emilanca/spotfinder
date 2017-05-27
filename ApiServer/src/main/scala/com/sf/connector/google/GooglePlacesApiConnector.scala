@@ -21,6 +21,9 @@ class GooglePlacesApiConnector(val sourceIp:String="") extends ApiConnector{
   }
 
   override def getNearbyLocationData(searchKey: String, latLong: LatLong = geoLocation.latLong): List[Location] = {
+    if (searchKey.isEmpty || searchKey.equals("undefined")) {
+      return List()
+    }
     val currentLatLng = buildLatLong(latLong.lat, latLong.long)
     PlacesApi.textSearchQuery(context, searchKey).location(currentLatLng).radius(5000).await().results.map(x=> new Location(x.name,x.formattedAddress, x.placeId, x.rating)).toList
   }
