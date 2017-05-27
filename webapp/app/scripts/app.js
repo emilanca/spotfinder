@@ -22,7 +22,7 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/spotfinder.html',
+        templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
@@ -30,11 +30,6 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
-      })
-      .when('/spotfinder', {
-        templateUrl: 'views/spotfinder.html',
-        controller: 'SpotfinderCtrl',
-        controllerAs: 'spotfinder'
       })
       .otherwise({
         redirectTo: '/'
